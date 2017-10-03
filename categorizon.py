@@ -98,10 +98,17 @@ class Grid:
 
 
 class Category:
+
+    CATNAME = None
+
     def __init__(self, srcpath):
         self.srcpath = srcpath
         self.fulldir = g_targets[self.CATNAME]
         load_to_player(None)
+
+    @classmethod
+    def file_matches(self, srcpath):
+        return False
 
     def draw_preview(self, x, y):
         pass
