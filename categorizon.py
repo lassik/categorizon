@@ -39,7 +39,9 @@ def exists_or_symlink(path):
     try:
         os.lstat(path)
     except OSError as e:
-        return e.errno == errno.EEXIST
+        if e.errno == ENOENT:
+            return False
+        raise
     return True
 
 
