@@ -18,9 +18,9 @@ import send2trash
 
 
 FONT = 'Helvetica'
-WIDTH = 200
-HEIGHT = 40
-HOWMANY = 4
+BUTTON_WIDTH = 200
+BUTTON_HEIGHT = 40
+BUTTONS_PER_ROW = 4
 GAP = 10
 
 BLUE = (0, 0, 255)
@@ -68,14 +68,15 @@ class Grid:
         self.texts, self.actions = zip(*action_text_pairs)
 
     def get_button_xy(self, i):
-        x = (i % HOWMANY) * (WIDTH + GAP)
-        y = g_window.height - (i // HOWMANY) * (HEIGHT + GAP)
+        x = (i % BUTTONS_PER_ROW) * (BUTTON_WIDTH + GAP)
+        y = g_window.height - (i // BUTTONS_PER_ROW) * (BUTTON_HEIGHT + GAP)
         return (x, y)
 
     def get_button_index_at_xy(self, x, y):
         for i in range(len(self.texts)):
             xbut, ybut = self.get_button_xy(i)
-            if xbut < x < xbut + WIDTH and ybut - HEIGHT < y < ybut:
+            if (xbut < x < xbut + BUTTON_WIDTH
+                    and ybut - BUTTON_HEIGHT < y < ybut):
                 return i
         return None
 
@@ -89,9 +90,10 @@ class Grid:
         FUDGE_FACTOR = 20
         for i, text in enumerate(self.texts):
             x, y = self.get_button_xy(i)
-            fill_rectangle(x, y, WIDTH, HEIGHT, BLUE)
+            fill_rectangle(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, BLUE)
             pyglet.text.Label(text, font_name=FONT, color=GREEN + (255,),
-                              font_size=16, x=x + WIDTH // 2, y=y - FUDGE_FACTOR,
+                              font_size=16,
+                              x=x + BUTTON_WIDTH // 2, y=y - FUDGE_FACTOR,
                               anchor_x='center', anchor_y='center').draw()
 
 
