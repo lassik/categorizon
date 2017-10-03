@@ -226,14 +226,6 @@ def move_file_to_trash():
 
 
 def play_file():
-    # Some files crash the program with:
-    #
-    # * 'Floating point exception: 8'
-    # * 'Segmentation fault: 11'
-    #
-    # If we autoplayed files then the user would have no way to skip
-    # those files. Maybe it's possible to catch and handle those
-    # signals somehow.
     assert g_player
     g_player.next_source()
     g_player.queue(pyglet.media.load(g_cat.srcpath))
