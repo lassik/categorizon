@@ -38,10 +38,8 @@ def dirnames(dirpath):
 def exists_or_symlink(path):
     try:
         os.lstat(path)
-    except OSError as e:
-        if e.errno == ENOENT:
-            return False
-        raise
+    except FileNotFoundError:
+        return False
     return True
 
 
