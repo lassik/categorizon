@@ -169,7 +169,7 @@ class Video(Category):
 
     @classmethod
     def file_matches(self, srcpath):
-        return has_ext(srcpath, "avi flv mkv mov mp4 srt webm")
+        return has_ext(srcpath, 'avi flv mkv mov mp4 srt webm wmv')
 
     def draw_preview(self, x, y):
         tex = g_player.get_texture()
