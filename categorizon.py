@@ -155,9 +155,11 @@ class Picture(Category):
 
     @classmethod
     def file_matches(self, srcpath):
-        return has_ext(srcpath, 'bmp gif jpeg jpg png tif tiff')
+        return has_ext(srcpath, 'bmp gif jpeg jpg png svg tif tiff')
 
     def draw_preview(self, x, y):
+        if has_ext(self.srcpath, 'svg'):
+            return
         pyglet.sprite.Sprite(pyglet.image.load(self.srcpath)).draw()
 
 
