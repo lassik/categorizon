@@ -243,7 +243,8 @@ g_targets = {
 }
 
 apars = argparse.ArgumentParser()
-apars.add_argument("srcdir")
+apars.add_argument("srcdir", nargs="?",
+                   default=os.path.expanduser("~/Downloads"))
 args = apars.parse_args()
 
 DSTDIR = os.path.expanduser("~/persist/public")
