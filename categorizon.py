@@ -11,12 +11,14 @@ import configparser
 import errno
 import os
 import sys
+import tempfile
 from subprocess import Popen
 
 import pyglet
 import send2trash
 
 
+PROGNAME = 'categorizon'
 FONT = 'Helvetica'
 BUTTON_WIDTH = 200
 BUTTON_HEIGHT = 40
@@ -132,13 +134,14 @@ class Document(Category):
         return has_ext(srcpath, "azw3 doc epub mobi pdf ps rtf text txt")
 
     def draw_preview_pdf(self, x, y):
-        tmpfile = os.path.expanduser("~/categorizon_tmp.png")
-        tmpstem = os.path.splitext(tmpfile)[0]
-        sub = Popen(["pdftoppm", self.srcpath, tmpstem,
-                     "-png", "-f", "1", "-singlefile"])
-        sub.communicate()
-        if sub.returncode == 0:
-            pyglet.sprite.Sprite(pyglet.image.load(tmpfile)).draw()
+        with tempfile.TemporaryDirectory(PROGNAME) as tmpdir:
+            tmpfile = os.path.join(tmpdir, "tmp.png")
+            tmpstem = os.path.splitext(tmpfile)[0]
+            sub = Popen(["pdftoppm", self.srcpath, tmpstem,
+                         "-png", "-f", "1", "-singlefile"])
+            sub.communicate()
+            if sub.returncode == 0:
+                pyglet.sprite.Sprite(pyglet.image.load(tmpfile)).draw()
 
     def draw_preview(self, x, y):
         if has_ext(self.srcpath, "pdf"):
@@ -249,7 +252,7 @@ args = apars.parse_args()
 
 DSTDIR = os.path.expanduser("~/persist/public")
 config = configparser.ConfigParser()
-config.read(os.path.expanduser('~/.config/categorizon.ini'))
+config.read(os.path.expanduser('~/.config/{}.ini'.format(PROGNAME)))
 for k, v in config['targets'].items():
     g_targets[k] = os.path.expanduser(v)
 print(repr(g_targets))
