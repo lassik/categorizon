@@ -28,8 +28,8 @@ BUTTON_HEIGHT = 40
 BUTTONS_PER_ROW = 4
 GAP = 10
 
-BLUE = (0, 0, 255)
-GREEN = (0, 255, 0)
+BUTTON_BACK_COLOR = (0, 0, 255)
+TEXT_COLOR = (0, 255, 0)
 
 
 def has_ext(basename, exts):
@@ -95,8 +95,8 @@ class Grid:
         FUDGE_FACTOR = 20
         for i, text in enumerate(self.texts):
             x, y = self.get_button_xy(i)
-            fill_rectangle(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, BLUE)
-            pyglet.text.Label(text, font_name=FONT, color=GREEN + (255,),
+            fill_rectangle(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_BACK_COLOR)
+            pyglet.text.Label(text, font_name=FONT, color=TEXT_COLOR + (255,),
                               font_size=16,
                               x=x + BUTTON_WIDTH // 2, y=y - FUDGE_FACTOR,
                               anchor_x='center', anchor_y='center').draw()
@@ -307,7 +307,7 @@ def next_file():
     g_filename_label = pyglet.text.Label(basename,
                                          font_name=FONT,
                                          font_size=20,
-                                         color=GREEN + (255,),
+                                         color=TEXT_COLOR + (255,),
                                          x=0, y=50)
     g_grid = Grid([('SKIP', next_file),
                    ('MOVE TO TRASH', move_file_to_trash),
