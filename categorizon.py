@@ -33,9 +33,9 @@ def color(hex6):
     return ((0xff & (hex6 >> 16)), (0xff & (hex6 >> 8)), (0xff & hex6))
 
 
-BUTTON_BACK_COLOR = color(0x0000ff)
-BUTTON_TEXT_COLOR = color(0x00ff00)
-FILENAME_TEXT_COLOR = color(0x00ff00)
+BUTTON_BACK_COLOR = color(0xcccccc)
+BUTTON_TEXT_COLOR = color(0xffffff)
+FILENAME_TEXT_COLOR = color(0x999999)
 
 
 def has_ext(basename, exts):
