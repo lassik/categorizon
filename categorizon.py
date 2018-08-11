@@ -28,8 +28,13 @@ BUTTON_HEIGHT = 40
 BUTTONS_PER_ROW = 4
 GAP = 10
 
-BUTTON_BACK_COLOR = (0, 0, 255)
-TEXT_COLOR = (0, 255, 0)
+
+def color(hex6):
+    return ((0xff & (hex6 >> 16)), (0xff & (hex6 >> 8)), (0xff & hex6))
+
+
+BUTTON_BACK_COLOR = color(0x0000ff)
+TEXT_COLOR = color(0x00ff00)
 
 
 def has_ext(basename, exts):
