@@ -1,10 +1,13 @@
 #! /usr/bin/env python3
 
+# IDEA: If file with same name already exists in target directory, but file contents are different, then append a number to new filename.
 # IDEA: Recurse into subdirectories in some reasonable manner.
 # IDEA: Handle zipfiles in some reasonable manner.
 # IDEA: Cleanup filenames (URL-decode, remove weird chars, extra whitespace, punctuation).
 # IDEA: Find duplicate files, move extra copies to trash.
 # IDEA: Auto-convert .ps files to .pdf using some command-line tool.
+# IDEA: Auto-convert .svg to .png (keep both files)
+# IDEA: Lowercase filename extension .PDF -> .pdf
 
 import argparse
 import configparser
