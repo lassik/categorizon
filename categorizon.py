@@ -83,8 +83,11 @@ class Grid:
         self.texts, self.actions = zip(*action_text_pairs)
 
     def get_button_xy(self, i):
+        grid_width = BUTTONS_PER_ROW * BUTTON_WIDTH + (BUTTONS_PER_ROW - 1) * GAP
         x = (i % BUTTONS_PER_ROW) * (BUTTON_WIDTH + GAP)
-        y = g_window.height - (i // BUTTONS_PER_ROW) * (BUTTON_HEIGHT + GAP)
+        y = (i // BUTTONS_PER_ROW) * (BUTTON_HEIGHT + GAP)
+        x = g_window.width - grid_width + x
+        y = g_window.height - y
         return (x, y)
 
     def get_button_index_at_xy(self, x, y):
