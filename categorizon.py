@@ -192,7 +192,7 @@ class Picture(Category):
 
     @classmethod
     def file_matches(self, srcpath):
-        return has_ext(srcpath, "bmp gif jpeg jpg png svg tif tiff")
+        return has_ext(srcpath, "bmp gif jpeg jpg jpg_large png svg tif tiff")
 
     def draw_preview(self, x, y):
         if has_ext(self.srcpath, "svg"):
@@ -244,8 +244,10 @@ def file_category(srcpath):
 def move_file_to_dst_subdir(dst_subdir):
     def foo():
         assert g_cat
+        dststem, dstext = os.path.splitext(os.path.basename(g_cat.srcpath))
+        dstext = {".jpg": ".jpg_large"}.get(dstext, dstext)
         dstfulldir = os.path.join(g_cat.fulldir, dst_subdir)
-        dstpath = os.path.join(dstfulldir, os.path.basename(g_cat.srcpath))
+        dstpath = os.path.join(dstfulldir, dststem + dstext)
         print(dstpath)
         assert not exists_or_symlink(dstpath)
         os.rename(g_cat.srcpath, dstpath)
