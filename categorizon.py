@@ -70,6 +70,8 @@ def fill_rectangle(x, y, w, h, rgb):
 
 def draw_image_from_file(filename):
     image = pyglet.image.load(filename)
+    if image.width < 1 or image.height < 1:
+        return
     scale_x = g_window.width / image.width
     scale_y = g_window.height / image.height
     scale = min(scale_x, scale_y)
