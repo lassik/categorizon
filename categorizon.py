@@ -347,8 +347,8 @@ def next_file():
     g_grid = Grid(
         [
             ("SKIP", next_file),
-            ("MOVE TO TRASH", move_file_to_trash),
-            ("MOVE TO ROOT", move_file_to_dst_root()),
+            ("TO TRASH", move_file_to_trash),
+            ("TO ROOT", move_file_to_dst_root()),
         ]
         + maybe_play_button()
         + [
