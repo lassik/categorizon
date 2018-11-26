@@ -143,7 +143,7 @@ class Category:
     def file_matches(self, srcpath):
         return False
 
-    def draw_preview(self, x, y):
+    def draw_preview(self):
         pass
 
 
@@ -164,7 +164,7 @@ class Document(Category):
     def file_matches(self, srcpath):
         return has_ext(srcpath, "azw3 doc epub mobi pdf ps rtf text txt")
 
-    def draw_preview_pdf(self, x, y):
+    def draw_preview_pdf(self):
         with tempfile.TemporaryDirectory(PROGNAME) as tmpdir:
             tmpfile = os.path.join(tmpdir, "tmp.png")
             tmpstem = os.path.splitext(tmpfile)[0]
@@ -175,15 +175,15 @@ class Document(Category):
             if sub.returncode == 0:
                 draw_image_from_file(tmpfile)
 
-    def draw_preview(self, x, y):
+    def draw_preview(self):
         if has_ext(self.srcpath, "pdf"):
-            return self.draw_preview_pdf(x, y)
+            return self.draw_preview_pdf()
         return pyglet.text.Label(
             open(self.srcpath, "rb").read(200).decode("utf-8", "ignore"),
             font_name=FONT,
             font_size=PREVIEW_FONT_SIZE,
-            x=x,
-            y=y,
+            x=0,
+            y=0,
         )
 
 
@@ -195,7 +195,7 @@ class Picture(Category):
     def file_matches(self, srcpath):
         return has_ext(srcpath, "bmp gif jpeg jpg jpg_large png svg tif tiff")
 
-    def draw_preview(self, x, y):
+    def draw_preview(self):
         if has_ext(self.srcpath, "svg"):
             return
         draw_image_from_file(self.srcpath)
@@ -209,7 +209,7 @@ class Video(Category):
     def file_matches(self, srcpath):
         return has_ext(srcpath, "avi flv mkv mov mp4 ogv srt webm wmv")
 
-    def draw_preview(self, x, y):
+    def draw_preview(self):
         tex = g_player.get_texture()
         if tex:
             tex.blit(0, 0)
@@ -309,7 +309,7 @@ g_player = None
 def on_draw():
     g_window.clear()
     if g_cat:
-        g_cat.draw_preview(10, 10)
+        g_cat.draw_preview()
     if g_filename_label:
         g_filename_label.draw()
     if g_grid:
