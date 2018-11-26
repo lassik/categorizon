@@ -21,6 +21,10 @@ import pyglet
 import send2trash
 
 
+def color(hex6):
+    return ((0xff & (hex6 >> 16)), (0xff & (hex6 >> 8)), (0xff & hex6))
+
+
 PROGNAME = "categorizon"
 FONT = "Helvetica"
 WINDOW_WIDTH = 1000
@@ -33,11 +37,6 @@ PREVIEW_FONT_SIZE = 20
 BUTTON_FONT_SIZE = 16
 BUTTONS_PER_ROW = 4
 GAP = 10
-
-
-def color(hex6):
-    return ((0xff & (hex6 >> 16)), (0xff & (hex6 >> 8)), (0xff & hex6))
-
 
 BUTTON_BACK_COLOR = color(0xcccccc)
 BUTTON_TEXT_COLOR = color(0xffffff)
