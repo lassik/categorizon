@@ -292,7 +292,9 @@ config = configparser.ConfigParser()
 config.read(os.path.expanduser("~/.config/{}.ini".format(PROGNAME)))
 for k, v in config["targets"].items():
     g_targets[k] = os.path.expanduser(v)
-print(repr(g_targets))
+for k, v in sorted(g_targets.items()):
+    print("{}: {}".format(k, v))
+print()
 
 g_remaining_files = [os.path.join(args.srcdir, name) for name in dirnames(args.srcdir)]
 
