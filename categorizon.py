@@ -342,7 +342,7 @@ def next_file():
         font_size=FILENAME_FONT_SIZE,
         color=FILENAME_TEXT_COLOR + (255,),
         x=0,
-        y=50,
+        y=g_window.height - FILENAME_FONT_SIZE,
     )
     g_grid = Grid(
         [
