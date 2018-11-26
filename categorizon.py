@@ -75,6 +75,7 @@ def draw_image_from_file(filename):
     scale = min(scale_x, scale_y)
     sprite = pyglet.sprite.Sprite(image)
     sprite.update(scale=scale)
+    sprite.update(y=g_window.height - sprite.height)
     sprite.draw()
 
 
