@@ -23,8 +23,14 @@ import send2trash
 
 PROGNAME = "categorizon"
 FONT = "Helvetica"
+WINDOW_WIDTH = 1000
+WINDOW_HEIGHT = 700
 BUTTON_WIDTH = 200
 BUTTON_HEIGHT = 40
+BUTTON_FUDGE_FACTOR = 20
+FILENAME_FONT_SIZE = 20
+PREVIEW_FONT_SIZE = 20
+BUTTON_FONT_SIZE = 16
 BUTTONS_PER_ROW = 4
 GAP = 10
 
@@ -96,17 +102,16 @@ class Grid:
         return self.actions[i]()
 
     def draw(self):
-        FUDGE_FACTOR = 20
         for i, text in enumerate(self.texts):
             x, y = self.get_button_xy(i)
             fill_rectangle(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_BACK_COLOR)
             pyglet.text.Label(
                 text,
                 font_name=FONT,
+                font_size=BUTTON_FONT_SIZE,
                 color=BUTTON_TEXT_COLOR + (255,),
-                font_size=16,
                 x=x + BUTTON_WIDTH // 2,
-                y=y - FUDGE_FACTOR,
+                y=y - BUTTON_FUDGE_FACTOR,
                 anchor_x="center",
                 anchor_y="center",
             ).draw()
@@ -163,7 +168,7 @@ class Document(Category):
         return pyglet.text.Label(
             open(self.srcpath, "rb").read(200).decode("utf-8", "ignore"),
             font_name=FONT,
-            font_size=20,
+            font_size=PREVIEW_FONT_SIZE,
             x=x,
             y=y,
         )
@@ -276,7 +281,7 @@ print(repr(g_targets))
 
 g_remaining_files = [os.path.join(args.srcdir, name) for name in dirnames(args.srcdir)]
 
-g_window = pyglet.window.Window(width=1000, height=700)
+g_window = pyglet.window.Window(width=WINDOW_WIDTH, height=WINDOW_HEIGHT)
 g_filename_label = None
 g_grid = None
 g_cat = None
@@ -320,7 +325,7 @@ def next_file():
     g_filename_label = pyglet.text.Label(
         basename,
         font_name=FONT,
-        font_size=20,
+        font_size=FILENAME_FONT_SIZE,
         color=FILENAME_TEXT_COLOR + (255,),
         x=0,
         y=50,
