@@ -68,6 +68,16 @@ def fill_rectangle(x, y, w, h, rgb):
     )
 
 
+def draw_image_from_file(filename):
+    image = pyglet.image.load(filename)
+    scale_x = g_window.width / image.width
+    scale_y = g_window.height / image.height
+    scale = min(scale_x, scale_y)
+    sprite = pyglet.sprite.Sprite(image)
+    sprite.update(scale=scale)
+    sprite.draw()
+
+
 def load_to_player(srcpath):
     global g_player
     if g_player:
@@ -162,7 +172,7 @@ class Document(Category):
             )
             sub.communicate()
             if sub.returncode == 0:
-                pyglet.sprite.Sprite(pyglet.image.load(tmpfile)).draw()
+                draw_image_from_file(tmpfile)
 
     def draw_preview(self, x, y):
         if has_ext(self.srcpath, "pdf"):
@@ -187,7 +197,7 @@ class Picture(Category):
     def draw_preview(self, x, y):
         if has_ext(self.srcpath, "svg"):
             return
-        pyglet.sprite.Sprite(pyglet.image.load(self.srcpath)).draw()
+        draw_image_from_file(self.srcpath)
 
 
 class Video(Category):
