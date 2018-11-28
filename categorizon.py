@@ -248,7 +248,7 @@ def move_file_to_dst_subdir(dst_subdir):
     def foo():
         assert g_cat
         dststem, dstext = os.path.splitext(os.path.basename(g_cat.srcpath))
-        dstext = {".jpg": ".jpg_large"}.get(dstext, dstext)
+        dstext = {".jpg_large": ".jpg"}.get(dstext, dstext)
         dstfulldir = os.path.join(g_cat.fulldir, dst_subdir)
         dstpath = os.path.join(dstfulldir, dststem + dstext)
         print(dstpath)
