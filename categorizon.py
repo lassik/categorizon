@@ -295,8 +295,9 @@ config = configparser.ConfigParser()
 config.read(os.path.expanduser("~/.config/{}.ini".format(PROGNAME)))
 for k, v in config["targets"].items():
     g_targets[k] = os.path.expanduser(v)
+maxkeylen = max(map(len, g_targets.keys()))
 for k, v in sorted(g_targets.items()):
-    print("{}: {}".format(k, v))
+    print("{} {}".format((k+":").ljust(maxkeylen+1), v))
 print()
 
 g_remaining_files = [os.path.join(args.srcdir, name) for name in dirnames(args.srcdir)]
