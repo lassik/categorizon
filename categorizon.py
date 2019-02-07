@@ -266,6 +266,7 @@ def move_file_to_dst_root():
 def move_file_to_trash():
     assert g_cat
     print("Moving to trash:", g_cat.srcpath)
+    load_to_player(None)
     send2trash.send2trash(g_cat.srcpath)
     next_file()
 
